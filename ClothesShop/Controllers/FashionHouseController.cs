@@ -15,7 +15,7 @@ namespace ClothesShop.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.FashionHouses.ToListAsync();
-            return View();
+            return View(data);
         }
     }
 }

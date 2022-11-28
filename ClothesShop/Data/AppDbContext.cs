@@ -34,7 +34,7 @@ namespace ClothesShop.Data
                 new Designer()
                 {
                      Id=2,
-                     ProfilePictureUrl = "https://www.istockphoto.com/pl/zdj%C4%99cie/pozytywny-sukces-millenials%C3%B3w-biznesmen-profesjonalny-m%C4%99%C5%BCczyzna-portret-gm1388253782-445953938",
+                     ProfilePictureUrl = "https://media.istockphoto.com/id/1309328823/pl/zdj%C4%99cie/headshot-portret-u%C5%9Bmiechni%C4%99tego-m%C4%99%C5%BCczyzny-pracownika-w-biurze.jpg?s=612x612&w=is&k=20&c=eyupE38eXpKITZer2D_XnKtsbWXYZ0u2sVgaifaNQYM=",
                      FullName = "Designer 2",
                      Bio = "This is the Bio of the second designer"
                 }

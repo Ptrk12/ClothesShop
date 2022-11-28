@@ -15,7 +15,7 @@ namespace ClothesShop.Controllers
         public IActionResult Index()
         {
             var data = _context.Designers.ToList();
-            return View();
+            return View(data);
         }
     }
 }

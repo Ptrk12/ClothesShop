@@ -1,4 +1,5 @@
 using ClothesShop.Data;
+using ClothesShop.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClothesShop
@@ -12,7 +13,9 @@ namespace ClothesShop
             // Add services to the container.
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(
                 builder.Configuration.GetConnectionString("DefaultConnection")));
-            
+
+            //Services configuration
+            builder.Services.AddScoped<IDesignerService, DesignerService>();
 
             builder.Services.AddControllersWithViews();
 

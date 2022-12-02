@@ -98,6 +98,7 @@ namespace ClothesShop.Data
                     DesignerId = 1
                 }
                 );
+            base.OnModelCreating(modelBuilder);
         }
         public string DbPath { get; set; }
         public DbSet<Designer> Designers { get; set; }

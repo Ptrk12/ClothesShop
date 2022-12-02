@@ -33,7 +33,6 @@ namespace ClothesShop.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
             return View();
             
         }
@@ -42,9 +41,55 @@ namespace ClothesShop.Controllers
             var designer = await _service.GetByIdAsync(id);
             if(designer == null)
             {
-                return View("Empty");
+                return View("NotFound");
             }
             return View(designer);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var designer = await _service.GetByIdAsync(id);
+            if (designer == null)
+            {
+                return View("NotFound");
+            }
+            return View(designer);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,[Bind("Id,FullName,ProfilePictureUrl,Bio")] Designer designer)
+        {
+
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateAsync(id, designer);
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View();
+
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var designer = await _service.GetByIdAsync(id);
+            if (designer == null)
+            {
+                return View("NotFound");
+            }
+            return View(designer);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var designer = _service.GetByIdAsync(id);
+            if (designer == null)
+            {
+                return View("NotFound");
+            }
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+
+        }
+
     }
 }

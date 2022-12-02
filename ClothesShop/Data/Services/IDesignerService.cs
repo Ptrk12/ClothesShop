@@ -7,7 +7,7 @@ namespace ClothesShop.Data.Services
         Task<IEnumerable<Designer>> GetAllAsync();
         Task<Designer> GetByIdAsync(int id);
         Task AddAsync(Designer designer);
-        Designer Update(int id, Designer designer);
-        void Delete(int id);
+        Task<Designer> UpdateAsync(int id, Designer designer);
+        Task DeleteAsync(int id);
     }
 }

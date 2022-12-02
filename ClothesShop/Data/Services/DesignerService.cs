@@ -18,9 +18,11 @@ namespace ClothesShop.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Designers.FirstOrDefaultAsync(x=>x.Id==id);
+            _context.Designers.Remove(result);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Designer>> GetAllAsync()
@@ -35,9 +37,11 @@ namespace ClothesShop.Data.Services
             return result;
         }
 
-        public Designer Update(int id, Designer designer)
+        public async Task<Designer> UpdateAsync(int id, Designer designer)
         {
-            throw new NotImplementedException();
+            _context.Update(designer);
+            await _context.SaveChangesAsync();
+            return designer;
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClothesShop.Data.Base;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace ClothesShop.Models
 {
-    public class Designer
+    public class Designer:IEntityBase
     {
         [HiddenInput]
         [Key]

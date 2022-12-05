@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq.Expressions;
 
 namespace ClothesShop.Data.Base
 {
@@ -27,6 +28,13 @@ namespace ClothesShop.Data.Base
         }
 
         public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
+
+        public async Task<IEnumerable<T>> GetAllSync(params Expression<Func<T, object>>[] includeProp)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            query = includeProp.Aggregate(query,(current,includeProp) => current.Include(includeProp));
+            return await query.ToListAsync();
+        }
 
         public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
 

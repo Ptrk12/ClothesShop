@@ -1,10 +1,11 @@
-﻿using ClothesShop.Data.Enums;
+﻿using ClothesShop.Data.Base;
+using ClothesShop.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClothesShop.Models
 {
-    public class Clothes
+    public class Clothes:IEntityBase
     {
         [Key]
         public int Id { get; set; }

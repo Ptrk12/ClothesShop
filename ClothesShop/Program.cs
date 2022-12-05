@@ -16,6 +16,8 @@ namespace ClothesShop
 
             //Services configuration
             builder.Services.AddScoped<IDesignerService, DesignerService>();
+            builder.Services.AddScoped<IFashionHouseService, FashionHouseService>();
+            builder.Services.AddScoped<IClothesService, ClothesService>();
 
             builder.Services.AddControllersWithViews();
 

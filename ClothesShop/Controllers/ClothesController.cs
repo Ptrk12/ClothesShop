@@ -1,6 +1,7 @@
 ﻿using ClothesShop.Data;
 using ClothesShop.Data.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClothesShop.Controllers
@@ -25,10 +26,11 @@ namespace ClothesShop.Controllers
             var item = await _service.GetClothesByIdAsync(id);
             return View(item);
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["Welcome"] = "Welcome to our store";
-            ViewBag.Description = "This is the store description";
+            var dropDownData = await _service.GetNewClothesDropDowns();
+            ViewBag.FashionHouse = new SelectList(dropDownData.FashionHouses,"Id","FullName");
+            ViewBag.Designers = new SelectList(dropDownData.Designers,"Id","FullName");
             return View();
         }
 

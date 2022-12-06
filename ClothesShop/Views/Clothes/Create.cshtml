@@ -1,5 +1,5 @@
 ﻿@model NewClothesVm
-
+@using ClothesShop.Data.Enums;
 @{
     ViewData["Title"]  = "Create a new clothes";
 
@@ -35,17 +35,17 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="FashionHouseId" class="control-label"></label>
-                                <select asp-for="FashionHouseId" class="form-control"> </select>
+                                <select asp-for="FashionHouseId" asp-items="ViewBag.FashionHouse" class="form-control"> </select>
                                 <span asp-validation-for="FashionHouseId" class="text-danger"></span>
                             </div>
                              <div class="form-group">
                                 <label asp-for="ClothesCategory" class="control-label"></label>
-                                <select asp-for="ClothesCategory" class="form-control"> </select>
+                                <select asp-for="ClothesCategory" class="form-control" asp-items="Html.GetEnumSelectList<ClothesCategory>()"></select>
                                 <span asp-validation-for="ClothesCategory" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="DesignerIds" class="control-label"></label>
-                                <select asp-for="DesignerIds" class="form-control" multiple></select>
+                                <select asp-for="DesignerIds" class="form-control" asp-items="ViewBag.Designers" multiple></select>
                                 <span asp-validation-for="DesignerIds" class="text-danger"></span>
                             </div>
                         </div>

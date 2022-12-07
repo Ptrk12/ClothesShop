@@ -7,7 +7,7 @@
 namespace ClothesShop.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,11 +16,11 @@ namespace ClothesShop.Migrations
                 name: "Designers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ProfilePictureUrl = table.Column<string>(type: "TEXT", nullable: false),
-                    FullName = table.Column<string>(type: "TEXT", nullable: false),
-                    Bio = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProfilePictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,11 +31,11 @@ namespace ClothesShop.Migrations
                 name: "FashionHouses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ProfilePictureUrl = table.Column<string>(type: "TEXT", nullable: false),
-                    FullName = table.Column<string>(type: "TEXT", nullable: false),
-                    Bio = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProfilePictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,14 +46,14 @@ namespace ClothesShop.Migrations
                 name: "Clothes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Price = table.Column<double>(type: "REAL", nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
-                    ClothesCategory = table.Column<int>(type: "INTEGER", nullable: false),
-                    FashionHouseId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClothesCategory = table.Column<int>(type: "int", nullable: false),
+                    FashionHouseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,8 +70,8 @@ namespace ClothesShop.Migrations
                 name: "Designers_Clothes",
                 columns: table => new
                 {
-                    ClothesId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DesignerId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ClothesId = table.Column<int>(type: "int", nullable: false),
+                    DesignerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,7 +96,7 @@ namespace ClothesShop.Migrations
                 values: new object[,]
                 {
                     { 1, "This is the Bio of the first designer", "Designer 1", "https://media.istockphoto.com/id/1226359172/pl/zdj%C4%99cie/gdzie%C5%9B-czeka-mnie-lepsza-przysz%C5%82o%C5%9B%C4%87.jpg?s=612x612&w=is&k=20&c=NwsymUIdac6wZdUPBjJ4DN8Yf_nSCBSwMcwHZImHd1k=" },
-                    { 2, "This is the Bio of the second designer", "Designer 2", "https://www.istockphoto.com/pl/zdj%C4%99cie/pozytywny-sukces-millenials%C3%B3w-biznesmen-profesjonalny-m%C4%99%C5%BCczyzna-portret-gm1388253782-445953938" }
+                    { 2, "This is the Bio of the second designer", "Designer 2", "https://media.istockphoto.com/id/1309328823/pl/zdj%C4%99cie/headshot-portret-u%C5%9Bmiechni%C4%99tego-m%C4%99%C5%BCczyzny-pracownika-w-biurze.jpg?s=612x612&w=is&k=20&c=eyupE38eXpKITZer2D_XnKtsbWXYZ0u2sVgaifaNQYM=" }
                 });
 
             migrationBuilder.InsertData(

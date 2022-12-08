@@ -1,0 +1,70 @@
+﻿@model NewClothesVm
+@using ClothesShop.Data.Enums;
+@{
+    ViewData["Title"]  = "Update clothes";
+
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Update clothes</h4>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price" class="control-label"></label>
+                                <input asp-for="Price" type="number" class="form-control" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ImageUrl" class="control-label"></label>
+                                <input asp-for="ImageUrl" class="form-control" />
+                                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="FashionHouseId" class="control-label"></label>
+                                <select asp-for="FashionHouseId" asp-items="ViewBag.FashionHouse" class="form-control"> </select>
+                                <span asp-validation-for="FashionHouseId" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="ClothesCategory" class="control-label"></label>
+                                <select asp-for="ClothesCategory" class="form-control" asp-items="Html.GetEnumSelectList<ClothesCategory>()"></select>
+                                <span asp-validation-for="ClothesCategory" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DesignerIds" class="control-label"></label>
+                                <select asp-for="DesignerIds" class="form-control" asp-items="ViewBag.Designers" multiple></select>
+                                <span asp-validation-for="DesignerIds" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-success float-end"/>
+                        <a class="btn btn-secondary" asp-action="Index">Show all</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

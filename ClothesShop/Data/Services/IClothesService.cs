@@ -8,5 +8,7 @@ namespace ClothesShop.Data.Services
     {
         Task<Clothes> GetClothesByIdAsync(int id);
         Task<NewClothesDropDownsVm> GetNewClothesDropDowns();
+        Task AddNewClothes(NewClothesVm data);
+        Task UpdateClothesAsync(NewClothesVm data);
     }
 }

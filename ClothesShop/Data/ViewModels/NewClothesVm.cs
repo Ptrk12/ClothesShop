@@ -7,6 +7,7 @@ namespace ClothesShop.Models
 {
     public class NewClothesVm
     {
+        public int Id { get; set; }
         [Required(ErrorMessage ="Name is required")]
         [Display(Description="Movie name")]
         public string Name { get; set; }

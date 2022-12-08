@@ -30,9 +30,9 @@
                             <a class="nav-link text-dark" asp-controller="FashionHouse" asp-action="Index"><i class="bi bi-building"></i>Fashion Houses</a>
                         </li>
                     </ul>
-                    <form asp-controller="Clolthes" asp-action="Filter">
+                    <form asp-controller="Clothes" asp-action="Filter">
                         <div class="input-group rounded">
-                            <input type="search" class="form-control rounded" placeholder="Search for a clothes" aria-label="Search" aria-describedby="search-addon" />
+                            <input name="searchString" type="search" class="form-control rounded" placeholder="Search for a clothes" aria-label="Search" aria-describedby="search-addon" />
                             <span class="input-group-text border-0" id="search-addon">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="bi bi-search"></i>

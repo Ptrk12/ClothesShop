@@ -1,8 +1,15 @@
 # ClothesShop
 
 This is an website for selling clothes online. <br/>
-In this project I have mainly considered to adding the products to the users cart, Administrator can add new designers, or clothes to this website 
-User can buy clothes added them to shopping cart e.t.c. We can also register a new account or log in if account already exist.
+<br/>
+
+main functionalities
+-creating new account or log in if already exist<br/>
+-adding, edit, or delete new clothes</br>
+-adding, edit, or delete new designers<br/>
+-adding, edit, or delete new fashioHouse </br>
+-Administrator and user role </br>
+-adding items to shopping cart
 <br/>
 <br/>
 <br/>

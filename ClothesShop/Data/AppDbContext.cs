@@ -105,5 +105,9 @@ namespace ClothesShop.Data
         public DbSet<Clothes> Clothes { get; set; }
         public DbSet<Designer_Clothes> Designers_Clothes { get; set; }
         public DbSet<FashionHouse> FashionHouses { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set;}
     }
 }

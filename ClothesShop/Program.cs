@@ -1,4 +1,5 @@
 using ClothesShop.Data;
+using ClothesShop.Data.Cart;
 using ClothesShop.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,10 @@ namespace ClothesShop
             builder.Services.AddScoped<IFashionHouseService, FashionHouseService>();
             builder.Services.AddScoped<IClothesService, ClothesService>();
 
+            builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+            builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+            builder.Services.AddSession();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -35,7 +40,7 @@ namespace ClothesShop
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.MapControllerRoute(

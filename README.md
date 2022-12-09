@@ -3,7 +3,7 @@
 This is an website for selling clothes online. <br/>
 <br/>
 
-main functionalities
+main functionalities<br/>
 -creating new account or log in if already exist<br/>
 -adding, edit, or delete new clothes</br>
 -adding, edit, or delete new designers<br/>

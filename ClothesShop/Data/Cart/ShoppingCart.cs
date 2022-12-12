@@ -77,5 +77,12 @@ namespace ClothesShop.Data.Cart
                 .Select(n => n.Clothes.Price * n.Amount).Sum();
             return total;
         }
+        public async Task ClearShoppingCartAsync()
+        {
+            var items = await _context.ShoppingCartItems.Where(x => x.ShoppingCartId == ShoppingCartId).ToListAsync();
+            _context.ShoppingCartItems.RemoveRange(items);
+            await _context.SaveChangesAsync();
+
+        }
     }
 }

@@ -40,6 +40,14 @@
                             </span>
                         </div>
                     </form>
+                    <ul class="navbar-nav">
+                        @await Component.InvokeAsync("ShoppingCartSummary")
+                    </ul>
+
+                    <div class="dropdown">
+                        <a class="btn btn-success" asp-controller="Order" asp-action="Index">Orders</a>
+                    </div>
+
                 </div>
             </div>
         </nav>

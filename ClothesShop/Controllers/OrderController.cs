@@ -9,11 +9,21 @@ namespace ClothesShop.Controllers
     {
         private readonly IClothesService _clothesService;
         private readonly ShoppingCart _shoppingCart;
-        public OrderController(IClothesService clothesService, ShoppingCart shoppingCart)
+        private readonly IOrdersService _ordersService;
+        public OrderController(IClothesService clothesService, ShoppingCart shoppingCart, IOrdersService ordersService)
         {
-            _clothesService= clothesService;
-            _shoppingCart= shoppingCart;
+            _clothesService = clothesService;
+            _shoppingCart = shoppingCart;
+            _ordersService = ordersService;
         }
+
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            return View(orders);
+        }
+
         public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
@@ -25,5 +35,37 @@ namespace ClothesShop.Controllers
             };
             return View(result);
         }
+
+        public async Task<IActionResult> AddItemToShoppingCart(int id)
+        {
+            var item = await _clothesService.GetClothesByIdAsync(id);
+            if(item != null)
+            {
+                _shoppingCart.AddItemToCart(item);
+            }
+            return RedirectToAction(nameof(ShoppingCart));
+        }
+
+        public async Task<IActionResult> RemoveItemFromShoppingCart(int id)
+        {
+            var item = await _clothesService.GetClothesByIdAsync(id);
+            if (item != null)
+            {
+                _shoppingCart.RemoveItemFromCart(item);
+            }
+            return RedirectToAction(nameof(ShoppingCart));
+        }
+
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = _shoppingCart.GetShoppingCartItems();
+            string userId = "";
+            string userEmailAdress = "";
+
+            await _ordersService.StoreOrderAsync(items, userId, userEmailAdress);
+            await _shoppingCart.ClearShoppingCartAsync();
+            return View("OrderCompleted");
+        }
+
     }
 }

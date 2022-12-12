@@ -19,6 +19,7 @@ namespace ClothesShop
             builder.Services.AddScoped<IDesignerService, DesignerService>();
             builder.Services.AddScoped<IFashionHouseService, FashionHouseService>();
             builder.Services.AddScoped<IClothesService, ClothesService>();
+            builder.Services.AddScoped<IOrdersService, OrdersService>();
 
             builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
             builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));

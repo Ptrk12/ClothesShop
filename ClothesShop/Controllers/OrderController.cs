@@ -2,6 +2,7 @@
 using ClothesShop.Data.Services;
 using ClothesShop.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ClothesShop.Controllers
 {
@@ -19,8 +20,9 @@ namespace ClothesShop.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string userId = "";
-            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId,userRole);
             return View(orders);
         }
 
@@ -59,8 +61,8 @@ namespace ClothesShop.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            string userId = "";
-            string userEmailAdress = "";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userEmailAdress = User.FindFirstValue(ClaimTypes.Email); ;
 
             await _ordersService.StoreOrderAsync(items, userId, userEmailAdress);
             await _shoppingCart.ClearShoppingCartAsync();

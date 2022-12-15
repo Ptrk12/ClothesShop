@@ -1,10 +1,12 @@
 ﻿using ClothesShop.Data;
 using ClothesShop.Data.Services;
 using ClothesShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClothesShop.Controllers
 {
+    [Authorize]
     public class DesignerController : Controller
     {
         private readonly IDesignerService _service;

@@ -57,7 +57,7 @@ namespace ClothesShop
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Clothes}/{action=Index}/{id?}");
             AppDbInitializer.SeedUsersRolesAsync(app).Wait();
             app.Run();
         }

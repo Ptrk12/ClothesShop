@@ -12,9 +12,15 @@ namespace ClothesShop.Data.Services
             _context = context;
         }
 
-        public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
+        public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId,string userRole)
         {
-            var orders = await _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Clothes).Where(x => x.UserId == userId).ToListAsync();
+            var orders = await _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Clothes).Include(x=>x.User).ToListAsync();
+
+            if(userRole != "Admin")
+            {
+                orders = orders.Where(x => x.UserId == userId).ToList();
+            }
+
             return orders;
         }
 

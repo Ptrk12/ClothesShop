@@ -18,17 +18,21 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+              
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="navbar-nav">
                             <a class="nav-link text-dark" asp-controller="Clothes" asp-action="Index"><i class="badge-info bi-android2"></i>Clothes</a>
-                        </li>   
-                        <li class="navbar-nav">
-                            <a class="nav-link text-dark" asp-controller="Designer" asp-action="Index"><i class="bi bi-brush"></i>Designers</a>
-                        </li>  
-                        <li class="navbar-nav">
-                            <a class="nav-link text-dark" asp-controller="FashionHouse" asp-action="Index"><i class="bi bi-building"></i>Fashion Houses</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="navbar-nav">
+                                <a class="nav-link text-dark" asp-controller="Designer" asp-action="Index"><i class="bi bi-brush"></i>Designers</a>
+                            </li>
+                            <li class="navbar-nav">
+                                <a class="nav-link text-dark" asp-controller="FashionHouse" asp-action="Index"><i class="bi bi-building"></i>Fashion Houses</a>
+                            </li>
+                        }
                     </ul>
                     <form asp-controller="Clothes" asp-action="Filter">
                         <div class="input-group rounded">

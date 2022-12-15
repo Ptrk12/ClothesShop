@@ -1,4 +1,5 @@
 ﻿using ClothesShop.Data;
+using ClothesShop.Data.Static;
 using ClothesShop.Data.ViewModels;
 using ClothesShop.Models;
 using Microsoft.AspNetCore.Identity;
@@ -47,6 +48,41 @@ namespace ClothesShop.Controllers
             }
             TempData["Error"] = "Try again";
             return View(loginVM);
+        }
+        public IActionResult Register()
+        {
+            var result = new RegisterVM();
+            return View(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM registerVM)
+        {
+            if (!ModelState.IsValid) return View(registerVM);
+
+            var user = await _userManager.FindByEmailAsync(registerVM.EmailAdress);
+            if (user != null)
+            {
+                TempData["Error"] = "Error";
+                return View(registerVM);
+            }
+            var newUser = new ApplicationUser()
+            {
+                FullName = registerVM.FullName,
+                Email = registerVM.EmailAdress,
+                UserName = registerVM.EmailAdress
+            };
+            var newUserResult = await _userManager.CreateAsync(newUser, registerVM.Password);
+            if(newUserResult.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+            }
+            return View("RegisterCompleted");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Clothes");
         }
     }
 }

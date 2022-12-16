@@ -108,6 +108,28 @@ namespace ClothesShop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            var clothes = await _service.GetClothesByIdAsync(id);
+            if (clothes == null)
+            {
+                return View("NotFound");
+            }
+            return View(clothes);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var clothes = await _service.GetClothesByIdAsync(id);
+            if (clothes == null)
+            {
+                return View("NotFound");
+            }
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+
+        }
+
 
     }
 }

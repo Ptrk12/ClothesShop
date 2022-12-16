@@ -11,6 +11,13 @@ main functionalities<br/>
 -Administrator and user role </br>
 -adding items to shopping cart
 <br/>
+Administrator: <br/>
+LOGIN: admin@clothes.com<br/>
+PASSWORD:Test123!
+<br/>
+User: <br/>
+LOGIN: user@clothes.com<br/>
+PASSWORD:Test123!
 <br/>
 <br/>
 <b>To run this application open appsettings.json file and change DATA SOURCE to your database server name 

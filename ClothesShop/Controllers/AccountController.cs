@@ -91,5 +91,9 @@ namespace ClothesShop.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Clothes");
         }
+        public IActionResult AccessDenied(string ReturnUrl)
+        {
+            return View();
+        }
     }
 }

@@ -1,12 +1,15 @@
 ﻿using ClothesShop.Data;
 using ClothesShop.Data.Services;
+using ClothesShop.Data.Static;
 using ClothesShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClothesShop.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ClothesController : Controller
     {
         private readonly IClothesService _service;
@@ -15,23 +18,25 @@ namespace ClothesShop.Controllers
         {
             _service = service;
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
             return View(data);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Filter(string searchString)
         {
             var data = await _service.GetAllAsync();
             if (!string.IsNullOrEmpty(searchString))
             {
-                var filter = data.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).ToList();
+                var filter = data.Where(x => x.Name.ToLower().Contains(searchString.ToLower()) || x.Description.ToLower().Contains(searchString.ToLower())).ToList();
                 return View("Index", filter);
             }
             return View("Index", data);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var item = await _service.GetClothesByIdAsync(id);

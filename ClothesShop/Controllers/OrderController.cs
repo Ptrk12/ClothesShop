@@ -1,11 +1,14 @@
 ﻿using ClothesShop.Data.Cart;
 using ClothesShop.Data.Services;
+using ClothesShop.Data.Static;
 using ClothesShop.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace ClothesShop.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IClothesService _clothesService;

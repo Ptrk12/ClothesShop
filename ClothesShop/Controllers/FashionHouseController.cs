@@ -1,11 +1,14 @@
 ﻿using ClothesShop.Data;
 using ClothesShop.Data.Services;
+using ClothesShop.Data.Static;
 using ClothesShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClothesShop.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class FashionHouseController : Controller
     {
         private readonly IFashionHouseService _service;
@@ -15,12 +18,14 @@ namespace ClothesShop.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync(); 
             return View(data);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var item = await _service.GetByIdAsync(id);

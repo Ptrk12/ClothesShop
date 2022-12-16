@@ -1,12 +1,13 @@
 ﻿using ClothesShop.Data;
 using ClothesShop.Data.Services;
+using ClothesShop.Data.Static;
 using ClothesShop.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClothesShop.Controllers
 {
-    [Authorize]
+    [Authorize(Roles =UserRoles.Admin)]
     public class DesignerController : Controller
     {
         private readonly IDesignerService _service;
@@ -16,6 +17,7 @@ namespace ClothesShop.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
@@ -38,6 +40,7 @@ namespace ClothesShop.Controllers
             return View();
             
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var designer = await _service.GetByIdAsync(id);

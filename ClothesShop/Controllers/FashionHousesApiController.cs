@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClothesShop.Controllers
 {
-    [Route("api/designer")]
+    [Route("api/fashionhouses")]
     [ApiController]
-    public class DesignerApiController : ControllerBase
+    public class FashionHousesApiController : ControllerBase
     {
-        private readonly IDesignerService _service;
+        private readonly IFashionHouseService _service;
 
-        public DesignerApiController(IDesignerService service)
+        public FashionHousesApiController(IFashionHouseService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<Designer>> Get()
+        public async Task<ActionResult<FashionHouse>> Get()
         {
             var result = await _service.GetAllAsync();
             return Ok(result);
@@ -25,14 +25,10 @@ namespace ClothesShop.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<Designer>> Get(int id)
+        public async Task<ActionResult<FashionHouse>> Get(int id)
         {
-            if(id == null)
-            {
-                return BadRequest();
-            }
             var result = await _service.GetByIdAsync(id);
-            if(result == null)
+            if (result == null)
             {
                 return NotFound();
             }
@@ -43,12 +39,8 @@ namespace ClothesShop.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            if(id == null)
-            {
-                return BadRequest();
-            }
             var result = await _service.GetByIdAsync(id);
-            if(result != null)
+            if (result != null)
             {
                 await _service.DeleteAsync(id);
                 return Ok();
@@ -57,31 +49,32 @@ namespace ClothesShop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Designer designer)
+        public async Task<IActionResult> Create([FromBody] FashionHouse fashionHouse)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            await _service.AddAsync(designer);
-            return Created($"/api/book/{designer.Id}", designer);
+            await _service.AddAsync(fashionHouse);
+            return Created($"/api/book/{fashionHouse.Id}", fashionHouse);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute]int id,[FromBody]Designer designer)
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] FashionHouse fashionHouse)
         {
-            var foundDesigner = await _service.GetByIdAsync(id);
-            if (foundDesigner == null)
+            var found = await _service.GetByIdAsync(id);
+            if (found == null)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                await _service.UpdateAsync(id, designer);
+                await _service.UpdateAsync(id, fashionHouse);
                 return Ok();
             }
             return BadRequest();
         }
     }
 }
+

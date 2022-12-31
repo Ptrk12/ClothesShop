@@ -86,7 +86,7 @@ namespace ClothesShop.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var designer = _service.GetByIdAsync(id);
+            var designer = await _service.GetByIdAsync(id);
             if (designer == null)
             {
                 return View("NotFound");

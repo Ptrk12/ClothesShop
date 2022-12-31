@@ -36,12 +36,18 @@ namespace ClothesShop.Data.Base
             return await query.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<T> GetByIdAsync(int id)
+        {
+            var entityBase = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            if (entityBase == null)
+                return null;
+            _context.Entry(entityBase).State = EntityState.Detached;
+            return entityBase;
+        }
 
         public async Task UpdateAsync(int id, T entity)
         {
-            EntityEntry entityEntry = _context.Entry<T>(entity);
-            entityEntry.State = EntityState.Modified;
+            _context.Update<T>(entity);
             await _context.SaveChangesAsync();
         }
     }

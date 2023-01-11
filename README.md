@@ -1,6 +1,6 @@
 # ClothesShop
 
-This is an website for selling clothes online. <br/>
+This is website for selling clothes online. <br/>
 <br/>
 
 main functionalities<br/>

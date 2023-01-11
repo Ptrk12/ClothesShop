@@ -17,7 +17,7 @@ namespace ClothesShop.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<FashionHouse>> Get()
+        public async Task<IActionResult> Get()
         {
             var result = await _service.GetAllAsync();
             return Ok(result);
@@ -25,7 +25,7 @@ namespace ClothesShop.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<FashionHouse>> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var result = await _service.GetByIdAsync(id);
             if (result == null)
@@ -39,10 +39,9 @@ namespace ClothesShop.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _service.GetByIdAsync(id);
-            if (result != null)
+            var isUpdated = await _service.DeleteAsync(id);
+            if (isUpdated)
             {
-                await _service.DeleteAsync(id);
                 return Ok();
             }
             return NotFound();
@@ -56,7 +55,7 @@ namespace ClothesShop.Controllers
                 return BadRequest();
             }
             await _service.AddAsync(fashionHouse);
-            return Created($"/api/book/{fashionHouse.Id}", fashionHouse);
+            return Created($"/api/fashionHouse/{fashionHouse.Id}", fashionHouse);
         }
 
         [HttpPut]
